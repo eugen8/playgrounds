@@ -118,6 +118,7 @@ describe("MethodDecorators in Typescript", () => {
     @first("me", "you")
     @second()
     @third
+    @LogMethod
     method() {
       console.log("in method");
     }
