@@ -37,7 +37,6 @@ describe("ClassDecorator", () => {
   }
 
   function addLogOnMethods(param: { rethrow: boolean }){
-
     // eslint-disable-next-line no-unused-vars
     function logEachMethod<T extends { new (...args: any[]): {} }>(
         constructor: T,
@@ -57,7 +56,6 @@ describe("ClassDecorator", () => {
         }
       });
     }
-
     return logEachMethod;
   }
 
