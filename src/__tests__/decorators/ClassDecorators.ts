@@ -36,7 +36,7 @@ describe("ClassDecorator", () => {
     return retObj;
   }
 
-  function createLogWithParam(param: { rethrow: boolean }){
+  function addLogOnMethods(param: { rethrow: boolean }){
 
     // eslint-disable-next-line no-unused-vars
     function logEachMethod<T extends { new (...args: any[]): {} }>(
@@ -62,8 +62,7 @@ describe("ClassDecorator", () => {
   }
 
 
-  // @logEachMethod
-  @createLogWithParam({rethrow: true})
+  @addLogOnMethods({rethrow: true})
   class BugReport {
     type = "report";
 
