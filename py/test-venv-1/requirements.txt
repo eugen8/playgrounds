@@ -1,0 +1,4 @@
+flask>=1.1.2,<2.0
+requests
+gunicorn
+boto3

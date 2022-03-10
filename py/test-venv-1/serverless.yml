@@ -1,0 +1,36 @@
+service: logiwa-local-fake
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  versionFunctions: false
+  memorySize: 128
+  region: us-west-1
+  
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /token
+          method: post
+  submitShipment:
+    handler: handler.submitShipment
+    events:
+      - httpApi:
+          path: /en/api/IntegrationApi/InsertShipmentOrder
+          method: post
+  warehouseOrderGetId:
+    handler: handler.warehouseOrderGetId
+    events:
+      - httpApi:
+          path: /en/api/IntegrationApi/WarehouseOrderGetID
+          method: post
