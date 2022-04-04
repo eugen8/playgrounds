@@ -22,6 +22,7 @@ functions:
       - httpApi:
           path: /token
           method: post
+      - sns: WarehouseNotificationDev
   submitShipment:
     handler: handler.submitShipment
     events:
@@ -34,3 +35,5 @@ functions:
       - httpApi:
           path: /en/api/IntegrationApi/WarehouseOrderGetID
           method: post
+plugins:
+  - serverless-offline-python

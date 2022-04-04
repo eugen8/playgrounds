@@ -6,7 +6,7 @@ To create a virtual environment:
 `python3 -m venv venv`  (or whichever the path to python3 is) where second venv is folder name
 
 to use we need to activate it
-`source venvName/bin/activate`
+`source venv/bin/activate`
 
 create `requirements.txt` 
 then to use it: `pip install -r requirements.txt`
