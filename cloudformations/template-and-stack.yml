@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: AWS CloudFormation workshop - Template and stack (uksb-1q9p31idr).
+
+# Add your code here!
+# From https://github.com/aws-samples/cfn101-workshop/blob/main/code/workspace/template-and-stack.yaml
+# Tutorial here: https://catalog.workshops.aws/cfn101/en-US/basics/templates/template-and-stack
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
