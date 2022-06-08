@@ -1,0 +1,29 @@
+service: sls-kinesis-http
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 'kinesis:DescribeStream'
+            - 'kinesis:DescribeStreamSummary'
+            - 'kinesis:GetRecords'
+            - 'kinesis:GetShardIterator'
+            - 'kinesis:ListShards'
+            - 'kinesis:ListStreams'
+            - 'kinesis:SubscribeToShard'
+          Resource: '*'
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+      - httpApi:
+          path: /
+          method: post
