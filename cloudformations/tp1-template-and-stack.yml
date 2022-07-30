@@ -6,10 +6,17 @@ Description: AWS CloudFormation workshop - Template and stack (uksb-1q9p31idr).
 # From https://github.com/aws-samples/cfn101-workshop/blob/main/code/workspace/template-and-stack.yaml
 # Tutorial here: https://catalog.workshops.aws/cfn101/en-US/basics/templates/template-and-stack
 
+Parameters:
+  S3BucketName:
+    Description: Name of the s3 bucket
+    Type: String
+    Default: hello-bucket-vw32
+
 Resources:
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
+      BucketName: !Ref S3BucketName # optional 
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
