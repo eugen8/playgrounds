@@ -1,0 +1,17 @@
+service: simple-sls-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  versionFunctions: true
+
+functions:
+  api:
+    handler: src/index.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+plugins:
+  - serverless-plugin-typescript
