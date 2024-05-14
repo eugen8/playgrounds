@@ -1,4 +1,5 @@
-service: simple-sls-project-v2
+service: simple-sls-project
+
 frameworkVersion: '3'
 
 custom:
@@ -10,6 +11,7 @@ provider:
   name: aws
   runtime: nodejs18.x
   versionFunctions: true
+  stage: ${self:custom.currentStage}
 
 functions:
   api:
@@ -20,11 +22,31 @@ functions:
           method: get
 resources:
   Resources:
-    PushGetShipmentDelayedTopicName:
+  # SNS Topic will get created automatically
+    GetSalaryTopicName:
       Type: AWS::SNS::Topic
       Properties:
         TopicName: *snsGetSalaryTopicName
         FifoTopic: false
+    SomeGetSalarySqsQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ${self:service}-get-salary-${self:provider.stage}
+        VisibilityTimeout: 900
+        RedrivePolicy:
+          deadLetterTargetArn: !GetAtt SomeGetSalarySqsQueueDeadLetterQueue.Arn
+          maxReceiveCount: 5
+    SomeGetSalarySqsQueueDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ${self:service}-get-salary-dlq-${self:provider.stage}
+        VisibilityTimeout: 900
+    SomeSalarySnsToSqsSubscription:
+      Type: "AWS::SNS::Subscription"
+      Properties:
+        Protocol: "sqs"
+        TopicArn: !Ref GetSalaryTopicName
+        Endpoint: !GetAtt SomeGetSalarySqsQueue.Arn
 
 plugins:
   - serverless-plugin-typescript
